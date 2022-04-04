@@ -19,6 +19,7 @@ class CreateGalleriesTable extends Migration
             $table->string('source');
             $table->string('caption');
             $table->timestamps();
+            $table->foreign('gallery_category_id')->references('id')->on('gallery_categories');
         });
     }
 
