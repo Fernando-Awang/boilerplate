@@ -43,6 +43,49 @@
     <script src="/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="/dist/js/adminlte.js"></script>
+    {{-- sweetalert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.4/dist/sweetalert2.all.min.js"
+        integrity="sha256-COxwIctJg+4YcOK90L6sFf84Z18G3tTmqfK98vtnz2Q=" crossorigin="anonymous"></script>
+    <script>
+        // konfirm logout
+        function logout() {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Konfirmasi',
+                text: "Anda akan logout, Lanjutkan?",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Lanjutkan!',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Tidak!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        icon: "success",
+                        text: "Terima kasih!",
+                    }).then((res) => {
+                        window.location = "{{ route('admin.logout') }}";
+                    })
+                }
+            });
+        }
+    </script>
+    @if (session()->get('error'))
+    <script>
+        Swal.fire({
+                    icon: 'error',
+                    text: "{{session()->get('error')}}",
+                })
+    </script>
+    @endif
+    @if (session()->get('success'))
+    <script>
+        Swal.fire({
+                    icon: 'success',
+                    text: "{{session()->get('success')}}",
+                })
+    </script>
+    @endif
 </body>
 
 </html>

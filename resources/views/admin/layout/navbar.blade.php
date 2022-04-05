@@ -20,7 +20,7 @@
                 <a href="#" class="dropdown-item">
                     <i class="fas fa-user mr-2"></i> Akun
                 </a>
-                <a href="#" class="dropdown-item">
+                <a href="#" class="dropdown-item" onclick="logout()">
                     <i class="fas fa-power-off mr-2"></i> Logout
                 </a>
             </div>
