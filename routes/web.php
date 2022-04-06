@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\LoginController;
@@ -30,6 +31,9 @@ Route::prefix('admin')->group(function(){
             return view('admin.content.dashboard.index');
         })->name('admin.dashboard');
         Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
+        // company-info
+        Route::get('/company-info', [CompanyController::class, 'index'])->name('admin.company.info');
+        Route::resource('company-info', CompanyController::class)->only(['update']);
         // user
         Route::get('/user', [UserController::class, 'index'])->name('admin.user');
         Route::resource('user', UserController::class)->except(['index', 'show', 'edit','create']);

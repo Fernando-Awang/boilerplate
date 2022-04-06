@@ -21,6 +21,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('admin.company.info')}}" class="nav-link">
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>
+                            Profil Instansi
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('admin.user')}}" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
