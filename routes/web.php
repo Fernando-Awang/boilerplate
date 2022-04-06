@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\PostCategoryController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,5 +32,9 @@ Route::prefix('admin')->group(function(){
         // post-category
         Route::get('/post-category', [PostCategoryController::class, 'index'])->name('admin.post.category');
         Route::resource('post-category', PostCategoryController::class)->except(['index', 'show', 'edit','create']);
+        // post
+        Route::get('/post', [PostController::class, 'index'])->name('admin.post');
+        Route::resource('post', PostController::class)->except(['index', 'edit','create']);
+        Route::post('post/update/{id}', [PostController::class, 'update']);
     });
 });

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    protected $filleable = [
+    protected $fillable = [
         'post_category_id',
         'author',
         'title',
@@ -16,4 +16,12 @@ class Post extends Model
         'thumbnail',
         'content',
     ];
+    public function category()
+    {
+        return $this->belongsTo(PostCategory::class, 'post_category_id', 'id');
+    }
+    public function get_author()
+    {
+        return $this->belongsTo(User::class, 'author', 'id');
+    }
 }

@@ -20,7 +20,7 @@ class PostCategoryController extends Controller
     {
         $data = $this->model->get();
         return view('admin.content.post-category.index', [
-            'title' => 'Kategori Posting',
+            'title' => 'Kategori Artikel',
             'data' => $data,
         ]);
     }
