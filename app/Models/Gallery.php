@@ -13,4 +13,8 @@ class Gallery extends Model
            'source',
            'caption',
     ];
+    public function category()
+    {
+        return $this->belongsTo(GalleryCategory::class, 'gallery_category_id', 'id');
+    }
 }

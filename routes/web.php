@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\GalleryCategoryController;
+use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\PostController;
@@ -36,11 +37,15 @@ Route::prefix('admin')->group(function(){
         Route::resource('post-category', PostCategoryController::class)->except(['index', 'show', 'edit','create']);
         // post
         Route::get('/post', [PostController::class, 'index'])->name('admin.post');
-        Route::resource('post', PostController::class)->except(['index', 'edit','create']);
+        Route::resource('post', PostController::class)->except(['index', 'edit','create', 'update']);
         Route::post('post/update/{id}', [PostController::class, 'update']);
         // gallery-category
         Route::get('/gallery-category', [GalleryCategoryController::class, 'index'])->name('admin.gallery.category');
         Route::resource('gallery-category', GalleryCategoryController::class)->except(['index', 'show', 'edit','create']);
+        // gallery
+        Route::get('/gallery', [GalleryController::class, 'index'])->name('admin.gallery');
+        Route::resource('gallery', GalleryController::class)->except(['index', 'edit','create', 'update']);
+        Route::post('gallery/update/{id}', [GalleryController::class, 'update']);
         // product-category
         Route::get('/product-category', [ProductCategoryController::class, 'index'])->name('admin.product.category');
         Route::resource('product-category', ProductCategoryController::class)->except(['index', 'show', 'edit','create']);
