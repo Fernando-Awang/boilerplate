@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductCategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,10 +45,14 @@ Route::prefix('admin')->group(function(){
         Route::resource('gallery-category', GalleryCategoryController::class)->except(['index', 'show', 'edit','create']);
         // gallery
         Route::get('/gallery', [GalleryController::class, 'index'])->name('admin.gallery');
-        Route::resource('gallery', GalleryController::class)->except(['index', 'edit','create', 'update']);
+        Route::resource('gallery', GalleryController::class)->except(['index', 'edit','show','create', 'update']);
         Route::post('gallery/update/{id}', [GalleryController::class, 'update']);
         // product-category
         Route::get('/product-category', [ProductCategoryController::class, 'index'])->name('admin.product.category');
         Route::resource('product-category', ProductCategoryController::class)->except(['index', 'show', 'edit','create']);
+        // product
+        Route::get('/product', [ProductController::class, 'index'])->name('admin.product');
+        Route::resource('product', ProductController::class)->except(['index', 'edit','create', 'update']);
+        Route::post('product/update/{id}', [ProductController::class, 'update']);
     });
 });
