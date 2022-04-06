@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,5 +24,8 @@ Route::prefix('admin')->group(function(){
             return view('admin.content.dashboard.index');
         })->name('admin.dashboard');
         Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
+        // user
+        Route::get('/user', [UserController::class, 'index'])->name('admin.user');
+        Route::resource('user', UserController::class)->except(['index', 'show', 'edit','create']);
     });
 });
