@@ -50,7 +50,7 @@ class PostCategoryController extends Controller
         }
         $data = $request->except('_token');
         $data['slug'] = slugify($data['name']);
-        $findData = $this->model->whereNotIn('id', [$id])->first();
+        $findData = $this->model->whereNotIn('id', [$id])->where('slug', $data['slug'])->first();
         if (isset($findData->id)) {
             return sendResponse('error', 'Kategori sudah ada');
         }

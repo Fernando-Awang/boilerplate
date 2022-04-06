@@ -186,6 +186,12 @@
                         title: 'Gagal',
                         text: 'Data gagal disimpan',
                     })
+                }else if(res.success == 'error'){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: 'Ketegori telah terdaftar',
+                    })
                 }
             },
             error: function(res) {
