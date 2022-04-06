@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,5 +41,8 @@ Route::prefix('admin')->group(function(){
         // gallery-category
         Route::get('/gallery-category', [GalleryCategoryController::class, 'index'])->name('admin.gallery.category');
         Route::resource('gallery-category', GalleryCategoryController::class)->except(['index', 'show', 'edit','create']);
+        // product-category
+        Route::get('/product-category', [ProductCategoryController::class, 'index'])->name('admin.product.category');
+        Route::resource('product-category', ProductCategoryController::class)->except(['index', 'show', 'edit','create']);
     });
 });
