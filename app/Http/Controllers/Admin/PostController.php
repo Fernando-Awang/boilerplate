@@ -39,16 +39,16 @@ class PostController extends Controller
         if (isset($findData->id)) {
             return sendResponse('error', 'Slug sudah ada');
         }
-        if ($request->hasFile('thumbnail')) {
-            $thumbnail = $request->file('thumbnail');
-            $extension = $thumbnail->getClientOriginalExtension();
-            $filename = date('ymd') . "-" . generateRandomString(10) . "." . $extension;
-            // save thumbnail
-            $thumbnail->move(public_path($this->path), $filename);
-            $data['thumbnail'] = $this->path .'/'. $filename;
-        }
         // return sendResponse(false, $data);
         try {
+            if ($request->hasFile('thumbnail')) {
+                $thumbnail = $request->file('thumbnail');
+                $extension = $thumbnail->getClientOriginalExtension();
+                $filename = date('ymd') . "-" . generateRandomString(10) . "." . $extension;
+                // save thumbnail
+                $thumbnail->move(public_path($this->path), $filename);
+                $data['thumbnail'] = $this->path .'/'. $filename;
+            }
             $this->model->create($data);
             $success = true;
             $message = 'ok';
@@ -75,7 +75,8 @@ class PostController extends Controller
         if (isset($findData->id)) {
             return sendResponse('error', 'Slug sudah ada');
         }
-        if ($request->hasFile('thumbnail')) {
+        try {
+            if ($request->hasFile('thumbnail')) {
                 $thumbnail = $request->file('thumbnail');
                 $extension = $thumbnail->getClientOriginalExtension();
                 $filename = date('ymd') . "-" . generateRandomString(10) . "." . $extension;
@@ -87,7 +88,6 @@ class PostController extends Controller
                 $thumbnail->move(public_path($this->path), $filename);
                 $data['thumbnail'] = $this->path .'/'. $filename;
             }
-        try {
             $this->model->where('id', $id)->update($data);
             $success = true;
             $message = 'ok';
@@ -100,11 +100,11 @@ class PostController extends Controller
     public function destroy($id)
     {
         $findData = $this->model->where('id', $id)->first();
-        if (isset($findData->thumbnail)) {
-            unlink(public_path($findData->thumbnail));
-        }
         if (!isset($findData->id)) {
             return sendResponse(false, 'Data tidak ditemukan');
+        }
+        if (isset($findData->thumbnail)) {
+            unlink(public_path($findData->thumbnail));
         }
         try {
             $this->model->where('id', $id)->delete();
