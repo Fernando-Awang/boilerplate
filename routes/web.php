@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\PostController;
@@ -36,5 +37,8 @@ Route::prefix('admin')->group(function(){
         Route::get('/post', [PostController::class, 'index'])->name('admin.post');
         Route::resource('post', PostController::class)->except(['index', 'edit','create']);
         Route::post('post/update/{id}', [PostController::class, 'update']);
+        // gallery-category
+        Route::get('/gallery-category', [GalleryCategoryController::class, 'index'])->name('admin.gallery.category');
+        Route::resource('gallery-category', GalleryCategoryController::class)->except(['index', 'show', 'edit','create']);
     });
 });
