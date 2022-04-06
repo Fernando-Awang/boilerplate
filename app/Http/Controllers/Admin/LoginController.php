@@ -15,9 +15,9 @@ class LoginController extends Controller
         $password = $request->password;
         if (auth()->attempt(['email' => $email, 'password' => $password])) {
             $user = auth()->user();
-            return redirect('/admin/dashboard')->with('success', 'Selamat datang ' . $user->name);
+            return redirect(route('admin.dashboard'))->with('success', 'Selamat datang ' . $user->name);
         } else {
-            return redirect('/admin/login')->with('error', 'User tidak ditemukan')->withInput();
+            return redirect(route('login'))->with('error', 'User tidak ditemukan')->withInput();
         }
     }
     public function logout(Request $request)
