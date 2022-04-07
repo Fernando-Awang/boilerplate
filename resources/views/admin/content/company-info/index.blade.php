@@ -17,24 +17,27 @@
 
         <!-- Default box -->
         <div class="card">
-            <div class="card-body">
+            <div class="card-body" id="companyData">
                 <div class="form-row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="">Nama Instansi</label>
                             <input type="text" class="form-control" id="name" placeholder="Nama" value="{{$data->name ?? ''}}">
+                            <div id="nameInvalid" class="invalid-feedback"></div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="">Telepon</label>
                             <input type="text" class="form-control" id="phone" placeholder="telepon" value="{{$data->phone ?? ''}}">
+                            <div id="phoneInvalid" class="invalid-feedback"></div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="">Email</label>
-                            <input type="text" class="form-control" id="email" placeholder="Email" value="{{$data->email ?? ''}}">
+                            <input type="email" class="form-control" id="email" placeholder="Email" value="{{$data->email ?? ''}}">
+                            <div id="emailInvalid" class="invalid-feedback"></div>
                         </div>
                     </div>
                 </div>
@@ -43,6 +46,7 @@
                         <div class="form-group">
                             <label for="">Alamat Instansi</label>
                             <textarea class="form-control" rows="3" id="office_address" placeholder="Alamat">{{$data->office_address ?? ''}}</textarea>
+                            <div id="office_addressInvalid" class="invalid-feedback"></div>
                         </div>
                         <div class="form-group">
                             <label for="">Visi</label>
@@ -54,6 +58,7 @@
                             <label for="">Deskripsi Instansi</label>
                             <textarea class="form-control" rows="3" id="about"
                             placeholder="Deskripsi Instansi">{{$data->about ?? ''}}</textarea>
+                            <div id="aboutInvalid" class="invalid-feedback"></div>
                         </div>
                         <div class="form-group">
                             <label for="">Misi</label>
@@ -103,11 +108,11 @@
         }
     }
     function update(id) {
-        resetForm()
-        $(".modal .form-control").attr('class', 'form-control is-valid')
+        $("#companyData .form-control").attr('class', 'form-control is-valid')
+        $('.invalid-feedback').text('');
         $.ajax({
-            url: "url('/company-info/" + id,
-            type: 'put',
+            url: "{{ url('/admin/company-info') }}" +"/"+ id,
+            type: 'post',
             dataType: 'json',
             data: requestData(),
             success: function(res) {

@@ -33,7 +33,7 @@ Route::prefix('admin')->group(function(){
         Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
         // company-info
         Route::get('/company-info', [CompanyController::class, 'index'])->name('admin.company.info');
-        Route::resource('company-info', CompanyController::class)->only(['update']);
+        Route::post('company-info/{id}', [CompanyController::class, 'update']);
         // user
         Route::get('/user', [UserController::class, 'index'])->name('admin.user');
         Route::resource('user', UserController::class)->except(['index', 'show', 'edit','create']);

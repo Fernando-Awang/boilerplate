@@ -15,6 +15,6 @@ class CompanyInfo extends Model
         'email',
         'about',
         'vision',
-        'mision',
+        'mission',
     ];
 }

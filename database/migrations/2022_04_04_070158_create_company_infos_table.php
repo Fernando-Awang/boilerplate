@@ -21,7 +21,7 @@ class CreateCompanyInfosTable extends Migration
             $table->string('email',50)->nullable();
             $table->text('about')->nullable();
             $table->text('vision')->nullable();
-            $table->text('mision')->nullable();
+            $table->text('mission')->nullable();
             $table->timestamps();
         });
     }

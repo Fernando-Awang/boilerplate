@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CompanyRequest;
 use App\Models\CompanyInfo;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class CompanyController extends Controller
             'data' => $data,
         ]);
     }
-    public function update(Request $request, $id)
+    public function update(CompanyRequest $request, $id)
     {
         $data = $request->except('_token');
         try {
