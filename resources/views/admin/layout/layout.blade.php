@@ -34,7 +34,6 @@
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
         </aside>
-         {{ route('admin.user', ['id'=>1]) }}
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
