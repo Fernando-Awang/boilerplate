@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\LoginController;
@@ -27,9 +28,7 @@ Route::prefix('admin')->group(function(){
     })->name('login');
     Route::post('/login', [LoginController::class, 'authenticate'])->name('admin.auth');
     Route::middleware('auth')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('admin.content.dashboard.index');
-        })->name('admin.dashboard');
+        Route::get('/dashboard',[DashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
         // company-info
         Route::get('/company-info', [CompanyController::class, 'index'])->name('admin.company.info');
