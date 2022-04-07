@@ -34,6 +34,7 @@
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
         </aside>
+         {{ route('admin.user', ['id'=>1]) }}
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
@@ -73,6 +74,52 @@
                     })
                 }
             });
+        }
+        function accountGet() {
+            $('#accountName').prop('class', 'form-control').val('{{ auth()->user()->name }}');
+            $('#accountEmail').prop('class', 'form-control').val('{{ auth()->user()->email }}');
+            $('#accountPassword').prop('class', 'form-control').val('');
+        }
+        function accountUpdate(id) {
+            $('.invalid-feedback').text('');
+            $('#accountName').prop('class', 'form-control is-valid');
+            $('#accountEmail').prop('class', 'form-control is-valid');
+            $('#accountPassword').prop('class', 'form-control is-valid');
+            let name = $('#accountName').val();
+            let email = $('#accountEmail').val();
+            let password = $('#accountPassword').val();
+            if (name == '') {
+                $('#accountName').prop('class', 'form-control is-invalid');
+                $('#accountNameInvalid').text('masukan nama');
+            }
+            $.ajax({
+                url: "{{ url('admin/user') }}" + "/" + id,
+                type: 'put',
+                dataType: 'json',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    name: $('#accountName').val(),
+                    email: $('#accountEmail').val(),
+                    password: $('#accountPassword').val(),
+                },
+                success: function(res) {
+                    if (res.success == true) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: 'Akun disimpan',
+                        }).then((done) => {
+                            location.reload()
+                        })
+                    }else if(res.success == false){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal',
+                            text: 'Akun gagal disimpan',
+                        })
+                    }
+                }
+            })
         }
     </script>
     @if (session()->get('error'))
