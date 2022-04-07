@@ -21,7 +21,7 @@ class PostCategoryController extends Controller
         $data = $this->model->get();
         return view('admin.content.post-category.index', [
             'title' => 'Kategori Artikel',
-            'data' => $data,
+            'data' => collect($data)->sortBy([['id', 'desc']]),
         ]);
     }
     public function store(PostCategoryRequest $request)

@@ -27,7 +27,7 @@ class GalleryController extends Controller
         $data = $this->model->with('category')->get();
         return view('admin.content.gallery.index', [
             'title' => 'Galeri',
-            'data' => $data,
+            'data' => collect($data)->sortBy([['id', 'desc']]),
             'category' => $category,
         ]);
     }

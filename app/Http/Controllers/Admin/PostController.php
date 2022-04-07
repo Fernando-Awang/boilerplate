@@ -26,7 +26,7 @@ class PostController extends Controller
         $data = $this->model->with('category')->with('get_author')->get();
         return view('admin.content.post.index', [
             'title' => 'Artikel',
-            'data' => $data,
+            'data' => collect($data)->sortBy([['id', 'desc']]),
             'category' => $category,
         ]);
     }

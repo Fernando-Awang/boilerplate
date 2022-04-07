@@ -23,7 +23,7 @@ class UserController extends Controller
         $data = $this->model->whereNotIn('id', [auth()->user()->id])->get();
         return view('admin.content.user.index', [
             'title' => 'Data Admin',
-            'data' => $data,
+            'data' => collect($data)->sortBy([['id', 'desc']]),
         ]);
     }
     public function store(StoreUserRequest $request)

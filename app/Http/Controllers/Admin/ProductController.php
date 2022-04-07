@@ -26,7 +26,7 @@ class ProductController extends Controller
         $data = $this->model->with('category')->get();
         return view('admin.content.product.index', [
             'title' => 'Produk',
-            'data' => $data,
+            'data' => collect($data)->sortBy([['id', 'desc']]),
             'category' => $category,
         ]);
     }

@@ -21,7 +21,7 @@ class ProductCategoryController extends Controller
         $data = $this->model->get();
         return view('admin.content.product-category.index', [
             'title' => 'Kategori Produk',
-            'data' => $data,
+            'data' => collect($data)->sortBy([['id', 'desc']]),
         ]);
     }
     public function store(ProductCategoryRequest $request)
