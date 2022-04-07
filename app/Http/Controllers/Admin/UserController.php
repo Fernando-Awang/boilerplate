@@ -20,7 +20,7 @@ class UserController extends Controller
     }
     public function index()
     {
-        $data = $this->model->get();
+        $data = $this->model->whereNotIn('id', [auth()->user()->id])->get();
         return view('admin.content.user.index', [
             'title' => 'Data Admin',
             'data' => $data,
