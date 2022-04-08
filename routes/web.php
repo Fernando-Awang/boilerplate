@@ -41,6 +41,8 @@ Route::prefix('admin')->group(function(){
         Route::resource('post-category', PostCategoryController::class)->except(['index', 'show', 'edit','create']);
         // post
         Route::get('/post', [PostController::class, 'index'])->name('admin.post');
+        Route::get('/post/create', [PostController::class, 'create'])->name('admin.post.create');
+        Route::get('/post/edit/{id}', [PostController::class, 'edit'])->name('admin.post.edit');
         Route::resource('post', PostController::class)->except(['index', 'edit','create', 'update']);
         Route::post('post/update/{id}', [PostController::class, 'update']);
         // gallery-category

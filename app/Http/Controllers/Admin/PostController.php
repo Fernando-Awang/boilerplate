@@ -22,12 +22,10 @@ class PostController extends Controller
     }
     public function index()
     {
-        $category = PostCategory::get();
         $data = $this->model->with('category')->with('get_author')->get();
         return view('admin.content.post.index', [
             'title' => 'Artikel',
             'data' => collect($data)->sortBy([['id', 'desc']]),
-            'category' => $category,
         ]);
     }
     public function store(StorePostRequest $request)
@@ -115,5 +113,25 @@ class PostController extends Controller
             $message = $e->errorInfo;
         }
         return sendResponse($success, $message);
+    }
+    public function create()
+    {
+        $category = PostCategory::get();
+        return view('admin.content.post.form', [
+            'title' => 'Tambah Artikel',
+            'category' => $category,
+            'setForm' => 'create',
+            'id' => '#',
+        ]);
+    }
+    public function edit($id)
+    {
+        $category = PostCategory::get();
+        return view('admin.content.post.form', [
+            'title' => 'Tambah Artikel',
+            'category' => $category,
+            'setForm' => 'edit',
+            'id' => $id,
+        ]);
     }
 }
